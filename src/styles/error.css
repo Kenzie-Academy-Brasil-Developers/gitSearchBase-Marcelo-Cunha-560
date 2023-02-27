@@ -1,0 +1,31 @@
+body{
+  
+    background-color: var(--color-grey-1);
+    overflow-y: hidden;
+    color: var(--color-grey-7);
+}
+
+.section__error{
+    display: flex;
+    justify-content: center;
+    padding-top: 24vh;
+    gap: 20px;
+}
+
+a{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 93px;
+    gap: 10px;
+
+    background-color: var(--color-brand-1);
+    color: var(--color-grey-7);
+
+    border-radius: 4px;
+
+    width: 316px;
+    height: 38px;
+}
