@@ -1,7 +1,7 @@
-import { error } from "console";
 
-export async function getlAllrepo(id){
-    const repoUer = await fetch(`https://api.github.com/users/${id}` ,{
+
+export async function getAllRepo(nome){
+    const repoUser = await fetch(`https://api.github.com/users/${nome}/repos` ,{
         method: 'GET',
         headers: {
             "Content-Type" : 'application/json'
@@ -9,39 +9,41 @@ export async function getlAllrepo(id){
     })
         .then((response) => {
             if(response.id > 0){
+                console.log(response.data)
+                localStorage.setItem('repoUser', response.data)
+                console.log(response.data)
                 return response.json()
+               
             }else{
                 console.log(error);
             }
+            
         })
-    
+        
+    return repoUser
 }
-console.log(getlAllrepo)
+
+
+
+
+
 
 export async function getUsers(nome) {
-    const users = await fetch(`https://api.github.com/users/${nome}`,{
-    method: 'GET',
-    headers: {
-        'Content-Type' : 'application¹/json'
-    }
-    })
-    .then(response => response.json())
-    .then(resp =>  {
-        localStorage.setItem('user', JSON.stringify(resp))
-        if(resp.id != 0){
-
-            window.location.replace('/src/pages/profile.html/profile.html')
-        } else{
-            window;location.replace('/src/pages/error.html')
+        
+        const user = await fetch(`https://api.github.com/users/${nome}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/json'
         }
-        return response.json()
-    })
-    .catch((err) => 
-    console.log(err));
-
-    return users
+        })
+        let response = await user.json()
+        
+        if(user.ok){
+            localStorage.setItem('userGit', JSON.stringify(response));
+            window.location.replace('/src/pages/profile.html')
+        
+        }else{
+            window.location.replace('/src/pages/error.html')
+        }
+        
 }
-
-const user = await getUsers('mojombo')
-
-console.log(user)
