@@ -1,26 +1,27 @@
 
 
 export async function getAllRepo(nome){
-    const repoUser = await fetch(`https://api.github.com/users/${nome}/repos` ,{
-        method: 'GET',
-        headers: {
-            "Content-Type" : 'application/json'
-        }
-    })
-        .then((response) => {
-            if(response.id > 0){
-                console.log(response.data)
-                localStorage.setItem('repoUser', response.data)
-                console.log(response.data)
-                return response.json()
-               
-            }else{
-                console.log(error);
+    try{
+        const repoUser = await fetch(`https://api.github.com/users/${nome}/repos` ,{
+            method: 'GET',
+            headers: {
+                "Content-Type" : 'application/json'
             }
-            
         })
+
+        const data = await repoUser.json()
+       
+        console.log(data)
+
+        localStorage.setItem('userGitRepo', JSON.stringify(data))
+
+        return data
         
-    return repoUser
+    }
+    
+    catch(err){
+        console.log(err)
+    }
 }
 
 

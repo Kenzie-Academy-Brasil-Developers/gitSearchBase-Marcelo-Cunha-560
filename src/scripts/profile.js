@@ -1,4 +1,4 @@
-import { getUsers, getAllRepo } from "./request.js";
+import { getUsers } from "./request.js";
 
 
 
@@ -13,9 +13,7 @@ export async function userGit() {
         e.preventDefault()
 
         await getUsers(input.value)
-        await getAllRepo(input.value)
-
-       
+    
     })
    
 
@@ -35,8 +33,11 @@ export async function renderUser (){
     const nameUser = document.createElement('p')
     nameUser.innerText = userObject.name
 
-    const userExchange = document.createElement('button');
+    const userExchange = document.createElement('a');
     userExchange.innerText = "Troca de usuário";
+    userExchange.classList.add('userExchange')
+    userExchange.href = '/'
+    
 
 
 
@@ -53,9 +54,37 @@ renderUser()
 
 
 export function renderRepo (){
-    let repoObject = JSON.parse(localStorage.getItem('repoUser'))
+    let repoObject = JSON.parse(localStorage.getItem('userGitRepo'));
 
-    console.log(repoObject)
+    const containerRepos = document.querySelector('.repo__container')
+    const ul = document.createElement('ul');
+    ul.classList.add('ulName')
+    containerRepos.appendChild(ul)
+
+    repoObject.forEach(element => {
+        
+        const li = document.createElement('li');
+
+        const h1 = document.createElement('h1');
+        h1.innerText = element.name
+
+        const pDescription = document.createElement('p')
+        pDescription.innerText = element.description
+
+        const buttonRepo = document.createElement('a')
+        buttonRepo.innerText = 'Repositório'
+        buttonRepo.href = element.html_url
+        
+        li.appendChild(h1)
+        ul.appendChild(li)
+
+        li.append(pDescription, buttonRepo)
+
+ 
+    });
+  
+
+    
 }
 
 renderRepo()
