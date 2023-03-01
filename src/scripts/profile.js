@@ -41,8 +41,8 @@ export async function renderUser (){
 
 
 
-    headerProfile.append(figureImg, nameUser, userExchange)
-    figureImg.appendChild(imgProfile)
+    headerProfile.append(figureImg, nameUser, userExchange);
+    figureImg.appendChild(imgProfile);
 
 
 
@@ -53,15 +53,19 @@ renderUser()
 
 
 
-export function renderRepo (){
+export async function renderRepo (){
     let repoObject = JSON.parse(localStorage.getItem('userGitRepo'));
 
+  
     const containerRepos = document.querySelector('.repo__container')
     const ul = document.createElement('ul');
+    ul.innerHTML = ''
     ul.classList.add('ulName')
     containerRepos.appendChild(ul)
 
-    repoObject.forEach(element => {
+    repoObject.forEach( async (element) => {
+
+        
         
         const li = document.createElement('li');
 
@@ -88,3 +92,5 @@ export function renderRepo (){
 }
 
 renderRepo()
+
+
